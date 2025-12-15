@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f1419;
+            color: #ffffff;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #667eea;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #667eea; }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 6px;
+            border-radius: 3px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    Portfolio
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link font-medium hover:text-blue-400">Home</a>
+                    <a href="#about" class="nav-link font-medium hover:text-blue-400">About</a>
+                    <a href="#experience" class="nav-link font-medium hover:text-blue-400">Experience</a>
+                    <a href="#skills" class="nav-link font-medium hover:text-blue-400">Skills</a>
+                    <a href="#projects" class="nav-link font-medium hover:text-blue-400">Projects</a>
+                    <a href="#education" class="nav-link font-medium hover:text-blue-400">Education</a>
+                    <a href="#contact" class="nav-link font-medium hover:text-blue-400">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <div class="flex flex-col space-y-2">
+                    <a href="#home" class="block py-2 px-4 rounded hover:bg-white/10">Home</a>
+                    <a href="#about" class="block py-2 px-4 rounded hover:bg-white/10">About</a>
+                    <a href="#experience" class="block py-2 px-4 rounded hover:bg-white/10">Experience</a>
+                    <a href="#skills" class="block py-2 px-4 rounded hover:bg-white/10">Skills</a>
+                    <a href="#projects" class="block py-2 px-4 rounded hover:bg-white/10">Projects</a>
+                    <a href="#education" class="block py-2 px-4 rounded hover:bg-white/10">Education</a>
+                    <a href="#contact" class="block py-2 px-4 rounded hover:bg-white/10">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center hero-gradient relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/20"></div>
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="floating">
+                <img src="Images/IMG_20250525_224400_784.jpg" 
+                     alt="Profile Picture" 
+                     class="w-40 h-40 rounded-full mx-auto mb-8 border-4 border-white/30 shadow-2xl object-cover">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">
+                Hi, I'm <span class="bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Nitish Kumar</span>
+            </h1>
+            <div class="text-2xl md:text-3xl mb-8 h-16">
+                <span id="typing-text" class="typing-animation"></span>
+            </div>
+            <p class="text-xl mb-8 max-w-2xl mx-auto text-white/90">
+                Passionate Web Developer with 6+ months of experience at NewJaisa, 
+                creating innovative web solutions and user-friendly interfaces.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#projects" class="bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
+                    View My Work
+                </a>
+                <button id="download-resume" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                    📄 Download Resume
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                    About Me
+                </h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    I'm a dedicated web developer who loves creating digital experiences that make a difference.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">My Journey</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        Currently working as a Web Developer at NewJaisa, where I've spent the last 6 months 
+                        honing my skills in full-stack development. I specialize in creating responsive, 
+                        user-friendly websites and applications using modern technologies.
+                    </p>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        My passion lies in solving complex problems through code and creating seamless 
+                        digital experiences. I'm constantly learning and adapting to new technologies 
+                        to stay at the forefront of web development.
+                    </p>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="bg-blue-600 px-3 py-1 rounded-full text-sm">Problem Solver</span>
+                        <span class="bg-purple-600 px-3 py-1 rounded-full text-sm">Team Player</span>
+                        <span class="bg-green-600 px-3 py-1 rounded-full text-sm">Quick Learner</span>
+                    </div>
+                </div>
+                <div class="glass-effect p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold mb-6">Quick Stats</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span>Experience</span>
+                            <span class="font-bold text-blue-400">6+ Months</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Projects Completed</span>
+                            <span class="font-bold text-purple-400">15+</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Technologies Mastered</span>
+                            <span class="font-bold text-green-400">10+</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span>Current Role</span>
+                            <span class="font-bold text-yellow-400">Web Developer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                    Experience
+                </h2>
+                <p class="text-xl text-gray-300">My professional journey in web development</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item glass-effect p-8 rounded-2xl mb-8 card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Web Developer</h3>
+                            <p class="text-blue-400 font-semibold">NewJaisa</p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            Current • 6+ Months
+                        </span>
+                    </div>
+                    <div class="text-gray-300 space-y-3">
+                        <p>• Developed and maintained responsive web applications using HTML, CSS, JavaScript, and modern frameworks</p>
+                        <p>• Collaborated with cross-functional teams to deliver high-quality web solutions</p>
+                        <p>• Optimized website performance and improved user experience across multiple projects</p>
+                        <p>• Implemented modern UI/UX design principles to create engaging user interfaces</p>
+                        <p>• Contributed to the company's digital transformation initiatives</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="timeline-item glass-effect p-8 rounded-2xl mb-8 card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Sales Executive</h3>
+                            <p class="text-blue-400 font-semibold">NewJaisa</p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            Sep 2024 to Mar 2025
+                        </span>
+                    </div>
+                    <div class="text-gray-300 space-y-3">
+                        <p>• Developed and maintained responsive web applications using HTML, CSS, JavaScript, and modern frameworks</p>
+                        <p>• Collaborated with cross-functional teams to deliver high-quality web solutions</p>
+                        <p>• Optimized website performance and improved user experience across multiple projects</p>
+                        <p>• Implemented modern UI/UX design principles to create engaging user interfaces</p>
+                        <p>• Contributed to the company's digital transformation initiatives</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                    Skills & Technologies
+                </h2>
+                <p class="text-xl text-gray-300">Technologies I work with</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Frontend Skills -->
+                <div class="glass-effect p-6 rounded-2xl card-hover">
+                    <h3 class="text-xl font-bold mb-6 text-blue-400">Frontend Development</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>HTML5</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>CSS3</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>JavaScript</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[80%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>React</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[75%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Backend Skills -->
+                <div class="glass-effect p-6 rounded-2xl card-hover">
+                    <h3 class="text-xl font-bold mb-6 text-green-400">Backend Development</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Java</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[85%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Spring Boot</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[70%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Node.js</span>
+                                <span>65%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[65%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Database</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[75%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Others -->
+                <div class="glass-effect p-6 rounded-2xl card-hover">
+                    <h3 class="text-xl font-bold mb-6 text-purple-400">Tools & Others</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Git/GitHub</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[80%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>VS Code</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[90%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Figma</span>
+                                <span>60%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[60%]"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span>Responsive Design</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="bg-gray-700 rounded-full h-2">
+                                <div class="progress-bar w-[85%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-red-500 bg-clip-text text-transparent">
+                    Featured Projects
+                </h2>
+                <p class="text-xl text-gray-300">Some of my recent work</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="glass-effect rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                        <span class="text-2xl font-bold">E-Commerce Platform</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">E-Commerce Website</h3>
+                        <p class="text-gray-300 mb-4">
+                            Full-stack e-commerce platform with user authentication, 
+                            product management, and payment integration.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-blue-600 px-2 py-1 rounded text-xs">React</span>
+                            <span class="bg-green-600 px-2 py-1 rounded text-xs">Node.js</span>
+                            <span class="bg-yellow-600 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="#" class="text-blue-400 hover:text-blue-300">Live Demo</a>
+                            <span class="text-gray-500">•</span>
+                            <a href="#" class="text-purple-400 hover:text-purple-300">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="glass-effect rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-green-500 to-blue-600 flex items-center justify-center">
+                        <span class="text-2xl font-bold">Task Manager</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Task Management App</h3>
+                        <p class="text-gray-300 mb-4">
+                            Productivity app with task creation, deadlines, 
+                            categories, and progress tracking features.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-red-600 px-2 py-1 rounded text-xs">Java</span>
+                            <span class="bg-green-600 px-2 py-1 rounded text-xs">Spring Boot</span>
+                            <span class="bg-blue-600 px-2 py-1 rounded text-xs">MySQL</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="#" class="text-blue-400 hover:text-blue-300">Live Demo</a>
+                            <span class="text-gray-500">•</span>
+                            <a href="#" class="text-purple-400 hover:text-purple-300">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-effect rounded-2xl overflow-hidden card-hover">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                        <span class="text-2xl font-bold">Portfolio Website</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Personal Portfolio</h3>
+                        <p class="text-gray-300 mb-4">
+                            Responsive portfolio website showcasing projects, 
+                            skills, and professional experience.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-orange-600 px-2 py-1 rounded text-xs">HTML5</span>
+                            <span class="bg-blue-600 px-2 py-1 rounded text-xs">CSS3</span>
+                            <span class="bg-yellow-600 px-2 py-1 rounded text-xs">JavaScript</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <a href="#" class="text-blue-400 hover:text-blue-300">Live Demo</a>
+                            <span class="text-gray-500">•</span>
+                            <a href="#" class="text-purple-400 hover:text-purple-300">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Education
+                </h2>
+                <p class="text-xl text-gray-300">My academic background</p>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <!-- Update these with your actual education details -->
+               
+                
+                 <div class="timeline-item glass-effect p-8 rounded-2xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Master of Computer Application</h3>
+                            <p class="text-cyan-400 font-semibold">Computer Science Engineering</p>
+                            <p class="text-gray-400">Dr. Ram Manohar Lohia Awadh University , Faizabad UP</p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            Oct 2021 - Aug 2023
+                        </span>
+                    </div>
+                    <div class="text-gray-300">
+                        <p>Relevant coursework: Data Structures, Algorithms, Database Management, 
+                        Web Development, Software Engineering, and Object-Oriented Programming.</p>
+                    </div>
+                </div>
+
+                 <div class="timeline-item glass-effect p-8 rounded-2xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Bachelor of Computer Application</h3>
+                            <p class="text-cyan-400 font-semibold">Computer Science Engineering</p>
+                            <p class="text-gray-400">Veer Bahadur Singh Purvanchal University</p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            Aug 2018 - Sep 2021
+                        </span>
+                    </div>
+                    <div class="text-gray-300">
+                        <p>Relevant coursework: Data Structures, Algorithms, Database Management, 
+                        Web Development, Software Engineering, and Object-Oriented Programming.</p>
+                    </div>
+                </div>
+
+
+                 <div class="timeline-item glass-effect p-8 rounded-2xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Diploma in Mechanical Engineering</h3>
+                            <p class="text-cyan-400 font-semibold">Mechanical Engineering</p>
+                            <p class="text-gray-400">Shri Ramswaroop Memorial University</p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            May 2016 - May 2018
+                        </span>
+                    </div>
+                    <div class="text-gray-300">
+                        <p>Relevant coursework: Data Structures, Algorithms, Database Management, 
+                        Web Development, Software Engineering, and Object-Oriented Programming.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item glass-effect p-8 rounded-2xl card-hover">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Higher Secondary</h3>
+                            <p class="text-cyan-400 font-semibold">Science Stream</p>
+                            <p class="text-gray-400"></p>
+                        </div>
+                        <span class="text-gray-400 bg-gray-800 px-3 py-1 rounded-full text-sm mt-2 md:mt-0">
+                            May 2014 - May 2016
+                        </span>
+                    </div>
+                    <div class="text-gray-300">
+                        <p>Focused on Mathematics, Physics, and Computer Science. 
+                        Developed strong analytical and problem-solving skills.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-pink-400 to-red-500 bg-clip-text text-transparent">
+                    Let's Connect
+                </h2>
+                <p class="text-xl text-gray-300">Get in touch for collaborations or opportunities</p>
+            </div>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="glass-effect p-8 rounded-2xl">
+                        <h3 class="text-2xl font-bold mb-6">Get In Touch</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                    📧
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <p class="text-gray-300">nitishkumarrajbhar715@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center">
+                                    📱
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Phone</p>
+                                    <p class="text-gray-300">+91 8176062036</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center">
+                                    💼
+                                </div>
+                                <div>
+                                    <p class="font-semibold">LinkedIn</p>
+                                    <a href="#" class="text-blue-400 hover:text-blue-300">https://www.linkedin.com/in/nitish72/</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-gray-600 rounded-full flex items-center justify-center">
+                                    🐙
+                                </div>
+                                <div>
+                                    <p class="font-semibold">GitHub</p>
+                                    <a href="#" class="text-blue-400 hover:text-blue-300">https://github.com/nitish72</a>
+                                </div
